@@ -2,7 +2,10 @@ import { FastifyInstance } from "fastify";
 import { z } from "zod";
 import { prisma } from "../lib/prisma";
 import { characterSchema } from "../lib/characterSheet";
-import { ZodTypeProvider } from "fastify-type-provider-zod";
+import {
+  ZodTypeProvider,
+  createJsonSchemaTransform,
+} from "fastify-type-provider-zod";
 
 export async function createCharacter(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
@@ -16,42 +19,22 @@ export async function createCharacter(app: FastifyInstance) {
           user: z.string().uuid(),
         }),
         response: {
-          201: characterSchema,
+          201: z.boolean(),
         },
       },
     },
     async (request, reply) => {
       const { user } = request.params;
-      const {
-        charName,
-        race,
-        character_class,
-        strength,
-        dexterity,
-        constitution,
-        intelligence,
-        wisdom,
-        charisma,
-        health,
-      } = request.body;
+      const { character_data } = request.body;
 
-      const character = await prisma.characterSheet.create({
+      await prisma.characterSheet.create({
         data: {
           user_id: user,
-          charName,
-          race,
-          character_class,
-          strength,
-          dexterity,
-          constitution,
-          intelligence,
-          wisdom,
-          charisma,
-          health,
+          character_data,
         },
       });
 
-      return reply.status(201).send(character);
+      return reply.status(201).send(true);
     }
   );
 }

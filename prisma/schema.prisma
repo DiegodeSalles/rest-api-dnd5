@@ -25,18 +25,9 @@ model User {
 }
 
 model CharacterSheet {
-  id              Int    @id @default(autoincrement())
-  user_id         String
-  charName        String
-  race            String
-  character_class String
-  strength        Int
-  dexterity       Int
-  constitution    Int
-  intelligence    Int
-  wisdom          Int
-  charisma        Int
-  health          Int
+  id             Int    @id @default(autoincrement())
+  user_id        String
+  character_data Json
 
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
