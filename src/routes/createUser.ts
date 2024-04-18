@@ -34,7 +34,7 @@ export async function createUser(app: FastifyInstance) {
       }
 
       const securePassword = await GeneratePassword(password);
-      const user = await prisma.teste.create({
+      const user = await prisma.user.create({
         data: {
           email,
           password: securePassword,

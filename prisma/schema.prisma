@@ -13,14 +13,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Teste {
-  id        String   @id @default(uuid())
-  public_id Int      @unique @default(autoincrement())
-  email     String   @unique
-  password  String
-  name      String
-  createdAt DateTime
-  teste     Json?
+model User {
+  id               String           @id @unique @default(uuid())
+  email            String           @unique
+  password         String
+  name             String
+  createdAt        DateTime
+  character_sheets CharacterSheet[]
 
-  @@map("testes")
+  @@map("users")
+}
+
+model CharacterSheet {
+  id              Int    @id @default(autoincrement())
+  user_id         String
+  charName        String
+  race            String
+  character_class String
+  strength        Int
+  dexterity       Int
+  constitution    Int
+  intelligence    Int
+  wisdom          Int
+  charisma        Int
+  health          Int
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@map("character_sheets")
 }

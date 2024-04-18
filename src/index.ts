@@ -9,6 +9,7 @@ import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
 import { getUsers } from "./routes/getUsers";
 import { loginUser } from "./routes/loginUser";
+import { createCharacter } from "./routes/createCharacter";
 
 const app = Fastify({ logger: true });
 
@@ -33,6 +34,7 @@ app.register(fastifySwaggerUi, { routePrefix: "/docs" });
 app.register(createUser);
 app.register(getUsers);
 app.register(loginUser);
+app.register(createCharacter);
 
 const start = async () => {
   try {

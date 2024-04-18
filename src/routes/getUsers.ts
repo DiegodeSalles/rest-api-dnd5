@@ -2,16 +2,9 @@ import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from "zod";
 import { prisma } from "../lib/prisma";
+import { usersSchema } from "../lib/user";
 
 export async function getUsers(app: FastifyInstance) {
-  const usersSchema = z.object({
-    id: z.string().uuid(),
-    public_id: z.number(),
-    email: z.string().email(),
-    password: z.string(),
-    createdAt: z.date(),
-  });
-
   app.withTypeProvider<ZodTypeProvider>().get(
     "/users",
     {
@@ -24,13 +17,14 @@ export async function getUsers(app: FastifyInstance) {
       },
     },
     async (request, reply) => {
-      const usuarios = await prisma.teste.findMany({
+      const usuarios = await prisma.user.findMany({
         select: {
           id: true,
-          public_id: true,
+          name: true,
           email: true,
           password: true,
           createdAt: true,
+          character_sheets: true,
         },
       });
 
