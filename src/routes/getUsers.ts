@@ -12,7 +12,7 @@ export async function getUsers(app: FastifyInstance) {
         summary: "Rota de testes com lista de usuários.",
         tags: ["usuarios"],
         response: {
-          200: z.array(usersSchema),
+          200: usersSchema,
         },
       },
     },
@@ -28,7 +28,7 @@ export async function getUsers(app: FastifyInstance) {
         },
       });
 
-      return reply.send(usuarios.map((usuario) => usuario));
+      return reply.send();
     }
   );
 }

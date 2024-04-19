@@ -370,19 +370,25 @@ export const spellListSchema = z
   .nullish();
 
 export const characterSchema = z.object({
-  character_data: z.object({
-    playerDetails: playerDetailsSchema,
-    attributes: attributesSchema,
-    saving_throws: savingThrowsSchema,
-    skills: skillsSchema,
-    stats: characterStatsSchema,
-    personality: personalitySchema,
-    attacks: attacksSchema,
-    otherProficiencies: otherProfLanguagesSchema,
-    equipment: equipmentSchema,
-    features_traits: featuresTraitsSchema,
-    info: characterInfoSchema,
-    spellcasting: spellcastingSchema,
-    spells: spellListSchema,
-  }),
+  playerDetails: playerDetailsSchema,
+  attributes: attributesSchema,
+  saving_throws: savingThrowsSchema,
+  skills: skillsSchema,
+  stats: characterStatsSchema,
+  personality: personalitySchema,
+  attacks: attacksSchema,
+  otherProficiencies: otherProfLanguagesSchema,
+  equipment: equipmentSchema,
+  features_traits: featuresTraitsSchema,
+  info: characterInfoSchema,
+  spellcasting: spellcastingSchema,
+  spells: spellListSchema,
+});
+
+export const characterSheetSchema = z.object({
+  id: z.number(),
+  user_id: z.string().uuid(),
+  character_data: characterSchema,
+  createdAt: z.date().nullish(),
+  updatedAt: z.date().nullish(),
 });
