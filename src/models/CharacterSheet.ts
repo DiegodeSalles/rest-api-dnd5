@@ -1,16 +1,5 @@
-// import { z } from "zod";
+import { ICharacter } from "../interfaces/characterInterfaces";
 import mongoose from "mongoose";
-
-interface PlayerDetails {
-  char_player_name: string;
-  char_name: string;
-  char_class: string;
-  char_level: number;
-  char_background: string;
-  char_race: string;
-  char_alignment: string;
-  char_xp: number;
-}
 
 const playerDetailsSchema = new mongoose.Schema(
   {
@@ -47,396 +36,158 @@ const equipmentSchema = new mongoose.Schema(
   { id: false }
 );
 
+const isProficientSubSchema = new mongoose.Schema({
+  isProficient: { type: Boolean, default: false },
+  value: { type: Number },
+});
+
+const savingThrowsSchema = new mongoose.Schema({
+  strength: isProficientSubSchema,
+  dexterity: isProficientSubSchema,
+  constitution: isProficientSubSchema,
+  intelligence: isProficientSubSchema,
+  wisdom: isProficientSubSchema,
+  charisma: isProficientSubSchema,
+});
+
+const skillsSchema = new mongoose.Schema({
+  acrobatics: isProficientSubSchema,
+  animal_handling: isProficientSubSchema,
+  arcana: isProficientSubSchema,
+  athletics: isProficientSubSchema,
+  deception: isProficientSubSchema,
+  history: isProficientSubSchema,
+  insight: isProficientSubSchema,
+  intimidation: isProficientSubSchema,
+  investigation: isProficientSubSchema,
+  medicine: isProficientSubSchema,
+  nature: isProficientSubSchema,
+  perception: isProficientSubSchema,
+  performance: isProficientSubSchema,
+  persuasion: isProficientSubSchema,
+  religion: isProficientSubSchema,
+  sleight_of_hand: isProficientSubSchema,
+  stealth: isProficientSubSchema,
+  survival: isProficientSubSchema,
+});
+
+const characterStatsSchema = new mongoose.Schema({
+  armor_class: { type: Number, required: true },
+  initiative: { type: Number, required: true },
+  speed: { type: String, required: true },
+  hitpoints: {
+    maximum: { type: Number, min: 0, required: true },
+    current: { type: Number, required: true },
+    temporary: { type: Number, min: 0 },
+  },
+  hitdice: {
+    total: { type: Number, min: 0, default: 0 },
+    value: { type: Number, default: 0 },
+  },
+  death_saves: {
+    successes: { type: Number, min: 0, max: 3, default: 0 },
+    failures: { type: Number, min: 0, max: 3, default: 0 },
+  },
+});
+
+const personalitySchema = new mongoose.Schema({
+  traits: { type: String, required: false },
+  ideals: { type: String, required: false },
+  bonds: { type: String, required: false },
+  flaws: { type: String, required: false },
+});
+
+const attacksSchema = new mongoose.Schema({
+  name: { type: String },
+  atk_bonus: { type: String },
+  damage_type: { type: String },
+});
+
+const otherProfLanguagesSchema = new mongoose.Schema({
+  value: { type: String, required: false },
+});
+
+const featuresTraitsSchema = new mongoose.Schema({
+  feature_traits: { type: String },
+  additional: { type: String },
+});
+
+const alliesOrganizationsSubSchema = new mongoose.Schema({
+  name: { type: String, required: false },
+  description: { type: String, required: false },
+});
+
+const characterInfo = new mongoose.Schema({
+  appearance: { type: String, required: false },
+  features: {
+    appearance: { type: String, required: false },
+    height: { type: String, required: false },
+    weight: { type: String, required: false },
+    eyes: { type: String, required: false },
+    skin: { type: String, required: false },
+    hair: { type: String, required: false },
+  },
+  allies_organizations: [alliesOrganizationsSubSchema],
+  backstory: { type: String, required: false },
+  treasure: [{ type: String, required: false }],
+});
+
+const spellcastingSchema = new mongoose.Schema({
+  class_name: { type: String },
+  status: {
+    ability: { type: String },
+    dc: { type: String },
+    bonus: { type: String },
+  },
+});
+
+const spellDataSubSchema = new mongoose.Schema({
+  slots_total: { type: Number },
+  slots_expended: { type: Number },
+  spells: [
+    {
+      isPrepared: { type: Boolean, default: false },
+      name: { type: String },
+    },
+  ],
+});
+
+const spellListSchema = new mongoose.Schema({
+  cantrips: [{ type: String }],
+  first: { type: spellDataSubSchema, required: false },
+  second: { type: spellDataSubSchema, required: false },
+  third: { type: spellDataSubSchema, required: false },
+  fourth: { type: spellDataSubSchema, required: false },
+  fifth: { type: spellDataSubSchema, required: false },
+  sixth: { type: spellDataSubSchema, required: false },
+  seventh: { type: spellDataSubSchema, required: false },
+  eighth: { type: spellDataSubSchema, required: false },
+  ninth: { type: spellDataSubSchema, required: false },
+});
+
 const characterDataSchema = new mongoose.Schema(
   {
     playerDetails: { type: playerDetailsSchema, required: true },
     attributes: { type: attributesSchema, required: true },
     equipment: [equipmentSchema],
+    saving_throws: { type: savingThrowsSchema, required: true },
+    skills: { type: skillsSchema, required: true },
+    character_stats: { type: characterStatsSchema, required: true },
+    personality: { type: personalitySchema, required: true },
+    attacks: { type: [attacksSchema], required: true },
+    other_proficiencies_languages: [otherProfLanguagesSchema],
+    features_traits: [featuresTraitsSchema],
+    character_info: characterInfo,
+    spellcasting: spellcastingSchema,
+    spell_list: spellListSchema,
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
   },
   { id: false }
 );
-
-interface ICharacter extends Document {
-  playerDetails: any;
-  attributes: any;
-  equipment: any;
-}
 
 export const Character = mongoose.model<ICharacter>(
   "characters",
   characterDataSchema
 );
-
-// export const testeCharacter = mongoose.model("characters", character);
-
-// export const savingThrowsSchema = new mongoose.Schema({
-//   strength: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   dexterity: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   constitution: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   intelligence: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   wisdom: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   charisma: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-// });
-
-// export const skillsSchema = new mongoose.Schema({
-//   acrobatics: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   animal_handling: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   arcana: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   athletics: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   deception: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   history: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   insight: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   intimidation: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   investigation: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   medicine: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   nature: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   perception: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   performance: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   persuasion: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   religion: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   sleight_of_hand: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   stealth: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-//   survival: {
-//     isProficient: { type: Boolean, default: false },
-//     value: { type: Number },
-//   },
-// });
-
-// export const characterStatsSchema = new mongoose.Schema({
-//   armor_class: { type: Number, required: true },
-//   initiative: { type: Number, required: true },
-//   speed: { type: String, required: true },
-//   hitpoints: {
-//     maximum: { type: Number, min: 0, required: true },
-//     current: { type: Number, required: true },
-//     temporary: { type: Number, min: 0 },
-//   },
-//   hitdice: {
-//     total: { type: Number, min: 0, default: 0 },
-//     value: { type: Number, default: 0 },
-//   },
-//   death_saves: {
-//     successes: { type: Number, min: 0, max: 3, default: 0 },
-//     failures: { type: Number, min: 0, max: 3, default: 0 },
-//   },
-// });
-
-// export const personalitySchema = z
-//   .object({
-//     traits: z.string().nullish(),
-//     ideals: z.string().nullish(),
-//     bonds: z.string().nullish(),
-//     flaws: z.string().nullish(),
-//   })
-//   .nullish();
-
-// export const attacksSchema = z
-//   .array(
-//     z.object({
-//       name: z.string().nullish(),
-//       atk_bonus: z.string().nullish(),
-//       damage_type: z.string().nullish(),
-//     })
-//   )
-//   .nullish();
-
-// export const otherProfLanguagesSchema = z.array(z.string()).nullish();
-
-// export const equipmentSchema = z
-//   .array(
-//     z.object({
-//       item_name: z.string(),
-//       isEquipped: z.boolean().default(false),
-//       itemDescription: z.string(),
-//     })
-//   )
-//   .nullish();
-
-// export const featuresTraitsSchema = z
-//   .array(
-//     z.object({
-//       features_traits: z.string().nullish(),
-//       additional: z.string().nullish(),
-//     })
-//   )
-//   .nullish();
-
-// export const characterInfoSchema = z
-//   .object({
-//     appearance: z.string().nullish(),
-//     features: z
-//       .object({
-//         age: z.string().nullish(),
-//         height: z.string().nullish(),
-//         weight: z.string().nullish(),
-//         eyes: z.string().nullish(),
-//         skin: z.string().nullish(),
-//         hair: z.string().nullish(),
-//       })
-//       .nullish(),
-//     allies_organizations: z
-//       .array(
-//         z.object({
-//           name: z.string().nullish(),
-//           description: z.string().nullish(),
-//         })
-//       )
-//       .nullish(),
-//     backstory: z.string().nullish(),
-//     treasure: z.array(z.string()).nullish(),
-//   })
-//   .nullish();
-
-// export const spellcastingSchema = z
-//   .object({
-//     class: z.string(),
-//     status: z.object({
-//       ability: z.string(),
-//       dc: z.number(),
-//       bonus: z.number(),
-//     }),
-//   })
-//   .nullish();
-
-// export const spellListSchema = z
-//   .object({
-//     cantrips: z.array(z.string()).nullish(),
-//     first: z
-//       .array(
-//         z.object({
-//           slots_total: z.number().min(0).nullish(),
-//           slots_expended: z.number().nullish(),
-//           spells: z
-//             .array(
-//               z.object({
-//                 isPrepared: z.boolean().default(false),
-//                 name: z.string(),
-//               })
-//             )
-//             .nullish(),
-//         })
-//       )
-//       .nullish(),
-//     second: z
-//       .array(
-//         z.object({
-//           slots_total: z.number().min(0).nullish(),
-//           slots_expended: z.number().nullish(),
-//           spells: z
-//             .array(
-//               z.object({
-//                 isPrepared: z.boolean().default(false),
-//                 name: z.string(),
-//               })
-//             )
-//             .nullish(),
-//         })
-//       )
-//       .nullish(),
-//     third: z
-//       .array(
-//         z.object({
-//           slots_total: z.number().min(0).nullish(),
-//           slots_expended: z.number().nullish(),
-//           spells: z
-//             .array(
-//               z.object({
-//                 isPrepared: z.boolean().default(false),
-//                 name: z.string(),
-//               })
-//             )
-//             .nullish(),
-//         })
-//       )
-//       .nullish(),
-//     fourth: z
-//       .array(
-//         z.object({
-//           slots_total: z.number().min(0).nullish(),
-//           slots_expended: z.number().nullish(),
-//           spells: z
-//             .array(
-//               z.object({
-//                 isPrepared: z.boolean().default(false),
-//                 name: z.string(),
-//               })
-//             )
-//             .nullish(),
-//         })
-//       )
-//       .nullish(),
-//     fifth: z
-//       .array(
-//         z.object({
-//           slots_total: z.number().min(0).nullish(),
-//           slots_expended: z.number().nullish(),
-//           spells: z
-//             .array(
-//               z.object({
-//                 isPrepared: z.boolean().default(false),
-//                 name: z.string(),
-//               })
-//             )
-//             .nullish(),
-//         })
-//       )
-//       .nullish(),
-//     sixth: z
-//       .array(
-//         z.object({
-//           slots_total: z.number().min(0).nullish(),
-//           slots_expended: z.number().nullish(),
-//           spells: z
-//             .array(
-//               z.object({
-//                 isPrepared: z.boolean().default(false),
-//                 name: z.string(),
-//               })
-//             )
-//             .nullish(),
-//         })
-//       )
-//       .nullish(),
-//     seventh: z
-//       .array(
-//         z.object({
-//           slots_total: z.number().min(0).nullish(),
-//           slots_expended: z.number().nullish(),
-//           spells: z
-//             .array(
-//               z.object({
-//                 isPrepared: z.boolean().default(false),
-//                 name: z.string(),
-//               })
-//             )
-//             .nullish(),
-//         })
-//       )
-//       .nullish(),
-//     eighth: z
-//       .array(
-//         z.object({
-//           slots_total: z.number().min(0).nullish(),
-//           slots_expended: z.number().nullish(),
-//           spells: z
-//             .array(
-//               z.object({
-//                 isPrepared: z.boolean().default(false),
-//                 name: z.string(),
-//               })
-//             )
-//             .nullish(),
-//         })
-//       )
-//       .nullish(),
-//     ninth: z
-//       .array(
-//         z.object({
-//           slots_total: z.number().min(0).nullish(),
-//           slots_expended: z.number().nullish(),
-//           spells: z
-//             .array(
-//               z.object({
-//                 isPrepared: z.boolean().default(false),
-//                 name: z.string(),
-//               })
-//             )
-//             .nullish(),
-//         })
-//       )
-//       .nullish(),
-//   })
-//   .nullish();
-
-// export const characterSchema = z.object({
-//   playerDetails: playerDetailsSchema,
-//   attributes: attributesSchema,
-//   saving_throws: savingThrowsSchema,
-//   skills: skillsSchema,
-//   stats: characterStatsSchema,
-//   personality: personalitySchema,
-//   attacks: attacksSchema,
-//   otherProficiencies: otherProfLanguagesSchema,
-//   equipment: equipmentSchema,
-//   features_traits: featuresTraitsSchema,
-//   info: characterInfoSchema,
-//   spellcasting: spellcastingSchema,
-//   spells: spellListSchema,
-// });
-
-// export const characterSheetSchema = z.object({
-//   id: z.number(),
-//   user_id: z.string().uuid(),
-//   character_data: characterSchema,
-//   createdAt: z.date().nullish(),
-//   updatedAt: z.date().nullish(),
-// });
