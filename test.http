@@ -9,7 +9,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/users
+GET http://localhost:3000/teste/retorno
 Content-Type: application/json
 
 ###
@@ -19,4 +19,34 @@ Content-Type: application/json
 {
   "email": "abcd@email.com",
   "password": "1234f5"
+}
+
+###
+POST http://localhost:3000/teste/create
+Content-Type: application/json
+
+{
+  "playerDetails": {
+    "char_player_name": "TTTT",
+    "char_name": "Teste",
+    "char_class": "Fighter",
+    "char_level": 1,
+    "char_background": "Teste",
+    "char_race": "Humano",
+    "char_alignment": "Neutro",
+    "char_xp": 0
+  },
+  "attributes": {
+    "strength": 3,
+    "dexterity": 3,
+    "constitution": 3,
+    "intelligence": 3,
+    "wisdom": 3,
+    "charisma": 3
+  },
+  "equipment": [
+    {"item_name": "Espada", "description": "Uma espada", "is_equipped": true},
+    {"item_name": "Escudo", "description": "Um escudo", "is_equipped": true},
+    {"item_name": "Capacete", "description": "Um capacete", "is_equipped": false}
+  ]
 }

@@ -1,6 +1,5 @@
 import { FastifyInstance } from "fastify";
 import { z } from "zod";
-import { prisma } from "../lib/prisma";
 import { characterSchema } from "../lib/characterSheet";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 

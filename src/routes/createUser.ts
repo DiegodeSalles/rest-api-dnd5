@@ -1,5 +1,4 @@
 import { FastifyInstance } from "fastify";
-import { prisma } from "../lib/prisma";
 import { GeneratePassword } from "../utils/passwordUtils";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from "zod";

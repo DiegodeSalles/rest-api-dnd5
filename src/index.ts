@@ -10,8 +10,15 @@ import fastifySwaggerUi from "@fastify/swagger-ui";
 import { getUsers } from "./routes/getUsers";
 import { loginUser } from "./routes/loginUser";
 import { createCharacter } from "./routes/createCharacter";
+import mongoose from "mongoose";
+import { testeRota } from "./routes/TesteModel";
+import { retornaTeste } from "./routes/TesteRetorno";
 
-const app = Fastify({ logger: true });
+async function main() {
+  mongoose.connect(process.env.MONGO_URL as string);
+}
+
+const app = Fastify();
 
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
@@ -27,19 +34,22 @@ app.register(fastifySwagger, {
       version: "1.0.0",
     },
   },
-  transform: jsonSchemaTransform,
+  // transform: jsonSchemaTransform,
 });
 
 app.register(fastifySwaggerUi, { routePrefix: "/docs" });
 app.register(createUser);
 app.register(getUsers);
 app.register(loginUser);
-app.register(createCharacter);
+// app.register(createCharacter);
+app.register(testeRota);
+app.register(retornaTeste);
 
 const start = async () => {
   try {
     await app.listen({ port: 3000, host: "0.0.0.0" });
     console.log("http://127.0.0.1:3000");
+    main().catch((err) => console.log(err));
   } catch (error) {
     process.exit(1);
   }
