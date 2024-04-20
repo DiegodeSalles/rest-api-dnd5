@@ -22,16 +22,16 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/teste/create
+POST http://localhost:3000/users/662422ced190abca40a45c9e/create
 Content-Type: application/json
 
 {
-  "playerDetails": {
-    "char_player_name": "TTTT",
+  "player_details": {
+    "char_player_name": "Diego",
     "char_name": "Teste",
-    "char_class": "Fighter",
+    "char_class": "Teste",
     "char_level": 1,
-    "char_background": "Teste",
+    "char_background": "Testes",
     "char_race": "Humano",
     "char_alignment": "Neutro",
     "char_xp": 0
@@ -45,8 +45,235 @@ Content-Type: application/json
     "charisma": 3
   },
   "equipment": [
-    {"item_name": "Espada", "description": "Uma espada", "is_equipped": true},
-    {"item_name": "Escudo", "description": "Um escudo", "is_equipped": true},
-    {"item_name": "Capacete", "description": "Um capacete", "is_equipped": false}
-  ]
+    {
+      "item_name": "Espada",
+      "description": "Uma espada",
+      "is_equipped": true
+    },
+    {
+      "item_name": "Escudo",
+      "description": "Um escudo",
+      "is_equipped": true
+    },
+    {
+      "item_name": "Capacete",
+      "description": "Um capacete",
+      "is_equipped": false
+    }
+  ],
+  "saving_throws": {
+    "strength": {
+      "isProficient": true,
+      "value": 3
+    },
+    "dexterity": {
+      "isProficient": true,
+      "value": 3
+    },
+    "constitution": {
+      "isProficient": true,
+      "value": 3
+    },
+    "intelligence": {
+      "isProficient": true,
+      "value": 3
+    },
+    "wisdom": {
+      "isProficient": true,
+      "value": 3
+    },
+    "charisma": {
+      "isProficient": true,
+      "value": 3
+    }
+  },
+  "skills": {
+    "acrobatics": {
+      "isProficient": true,
+      "value": 3
+    },
+  "animal_handling": {
+      "isProficient": true,
+      "value": 3
+    },
+  "arcana": {
+      "isProficient": true,
+      "value": 3
+    },
+  "athletics": {
+      "isProficient": true,
+      "value": 3
+    },
+  "deception": {
+      "isProficient": true,
+      "value": 3
+    },
+  "history": {
+      "isProficient": true,
+      "value": 3
+    },
+  "insight": {
+      "isProficient": true,
+      "value": 3
+    },
+  "intimidation": {
+      "isProficient": true,
+      "value": 3
+    },
+  "investigation": {
+      "isProficient": true,
+      "value": 3
+    },
+  "medicine": {
+      "isProficient": true,
+      "value": 3
+    },
+  "nature": {
+      "isProficient": true,
+      "value": 3
+    },
+  "perception": {
+      "isProficient": true,
+      "value": 3
+    },
+  "performance": {
+      "isProficient": true,
+      "value": 3
+    },
+  "persuasion": {
+      "isProficient": true,
+      "value": 3
+    },
+  "religion": {
+      "isProficient": true,
+      "value": 3
+    },
+  "sleight_of_hand": {
+      "isProficient": true,
+      "value": 3
+    },
+  "stealth": {
+      "isProficient": true,
+      "value": 3
+    },
+  "survival": {
+      "isProficient": true,
+      "value": 3
+    }
+  },
+  "character_stats": {
+    "armor_class": 10,
+    "initiative": 0,
+    "speed": "9m",
+    "hitpoints": {
+      "maximum": 10,
+      "current": 10
+    },
+    "hitdice": {
+      "total": 1,
+      "value": "1d10"
+    },
+    "death_saves": {
+      "successes": 0,
+      "failures": 0
+    }
+  },
+  "personality": {
+    "traits": "blablabla",
+    "ideals": "blebleble",
+    "bonds": "bliblbli",
+    "flaws": "blobloblo"
+  },
+  "attacks": 
+    [
+      {
+        "name": "soco",
+        "atk_bonus": "+1",
+        "damage_type": "teste"
+      },
+      {
+        "name": "Espada",
+        "atk_bonus": "+2",
+        "damage_type": "teste"
+      }
+    ],
+  "other_proficiency_languages": [{"value": "teste"}],
+  "feature_traits": [
+    {
+      "name": "jdaosijodi",
+      "additional": "osifjsodifj"
+    },
+    {
+      "name": "dfgdfgdf",
+      "additional": "xcvbxcvbxcv"
+    }
+  ],
+  "character_info": {
+    "appearance": "teste",
+    "features": {
+      "age": "teste",
+      "height": "teste1",
+      "weight": "teste2",
+      "eyes": "teste3",
+      "skin": "teste4",
+      "hair": "teste5"
+    },
+    "allies_organizations": [
+      {
+        "name": "tanto faz",
+        "description": "tanto faz"
+      },
+      {
+        "name": "tanto fez",
+        "description": "tanto fez"
+      }
+    ],
+    "backstory": "um teste pro banco",
+    "treasure": ["um dinheiro", "dois dinheiros", "três dinheiros"]
+  },
+  "spellcasting": {
+    "class_name": "teste",
+    "status": {
+      "ability": "intelligence",
+      "dc": "5",
+      "bonus": "2"
+    }
+  },
+  "spell_list": {
+    "cantrips": ["um cantrip", "dois cantrips"],
+    "first": {
+      "slots_total": 4,
+      "slots_expended": 0,
+      "spells": [
+        {
+        "isPrepared": true,
+        "name": "uma magia"
+        },
+        {
+        "isPrepared": true,
+        "name": "outra magia"
+        },
+        {
+        "name": "mais outra magia"
+        }
+      ]
+    },
+    "second": {
+      "slots_total": 4,
+      "slots_expended": 0,
+      "spells": [
+        {
+        "isPrepared": true,
+        "name": "uma magia"
+        },
+        {
+        "isPrepared": true,
+        "name": "outra magia"
+        },
+        {
+        "name": "mais outra magia"
+        }
+      ]
+    }
+  }
 }

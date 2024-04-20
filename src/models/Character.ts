@@ -78,11 +78,11 @@ const characterStatsSchema = new mongoose.Schema({
   hitpoints: {
     maximum: { type: Number, min: 0, required: true },
     current: { type: Number, required: true },
-    temporary: { type: Number, min: 0 },
+    temporary: { type: Number, min: 0, default: 0 },
   },
   hitdice: {
     total: { type: Number, min: 0, default: 0 },
-    value: { type: Number, default: 0 },
+    value: { type: String, default: 0 },
   },
   death_saves: {
     successes: { type: Number, min: 0, max: 3, default: 0 },
@@ -108,7 +108,7 @@ const otherProfLanguagesSchema = new mongoose.Schema({
 });
 
 const featuresTraitsSchema = new mongoose.Schema({
-  feature_traits: { type: String },
+  name: { type: String },
   additional: { type: String },
 });
 
@@ -120,7 +120,7 @@ const alliesOrganizationsSubSchema = new mongoose.Schema({
 const characterInfo = new mongoose.Schema({
   appearance: { type: String, required: false },
   features: {
-    appearance: { type: String, required: false },
+    age: { type: String, required: false },
     height: { type: String, required: false },
     weight: { type: String, required: false },
     eyes: { type: String, required: false },
@@ -167,7 +167,7 @@ const spellListSchema = new mongoose.Schema({
 
 const characterDataSchema = new mongoose.Schema(
   {
-    playerDetails: { type: playerDetailsSchema, required: true },
+    player_details: { type: playerDetailsSchema, required: true },
     attributes: { type: attributesSchema, required: true },
     equipment: [equipmentSchema],
     saving_throws: { type: savingThrowsSchema, required: true },
@@ -180,7 +180,7 @@ const characterDataSchema = new mongoose.Schema(
     character_info: characterInfo,
     spellcasting: spellcastingSchema,
     spell_list: spellListSchema,
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
   },
@@ -188,6 +188,6 @@ const characterDataSchema = new mongoose.Schema(
 );
 
 export const Character = mongoose.model<ICharacter>(
-  "characters",
+  "Characters",
   characterDataSchema
 );

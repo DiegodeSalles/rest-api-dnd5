@@ -1,18 +1,15 @@
 import Fastify from "fastify";
-import { createUser } from "./routes/createUser";
 import {
-  jsonSchemaTransform,
   serializerCompiler,
   validatorCompiler,
 } from "fastify-type-provider-zod";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
-import { getUsers } from "./routes/getUsers";
-import { loginUser } from "./routes/loginUser";
-import { createCharacter } from "./routes/createCharacter";
+import { createUserTeste } from "./routes/createUserTeste";
+
 import mongoose from "mongoose";
-import { testeRota } from "./routes/TesteModel";
-import { retornaTeste } from "./routes/TesteRetorno";
+
+import { createCharacterTeste } from "./routes/createCharacterTeste";
 
 async function main() {
   mongoose.connect(process.env.MONGO_URL as string);
@@ -34,16 +31,12 @@ app.register(fastifySwagger, {
       version: "1.0.0",
     },
   },
-  // transform: jsonSchemaTransform,
 });
 
 app.register(fastifySwaggerUi, { routePrefix: "/docs" });
-app.register(createUser);
-app.register(getUsers);
-app.register(loginUser);
-// app.register(createCharacter);
-app.register(testeRota);
-app.register(retornaTeste);
+
+app.register(createUserTeste);
+app.register(createCharacterTeste);
 
 const start = async () => {
   try {

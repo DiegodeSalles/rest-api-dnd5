@@ -70,7 +70,7 @@ interface CharacterStats {
   };
   hitdice: {
     total: number;
-    value: number;
+    value: string;
   };
   death_saves: {
     successes: number;
@@ -96,7 +96,7 @@ interface OtherProficienciesLanguages {
 }
 
 interface FeaturesTraits {
-  feature_traits: string;
+  name: string;
   additional: string;
 }
 
@@ -150,7 +150,7 @@ interface SpellList {
 }
 
 export interface ICharacter extends Document {
-  playerDetails: PlayerDetails;
+  player_details: PlayerDetails;
   attributes: Attributes;
   equipment?: Equipment[];
   saving_throws: SavingThrows;
