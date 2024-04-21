@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   email: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
-  charater_sheets_ids: [
+  character_sheets_ids: [
     { type: mongoose.Schema.Types.ObjectId, ref: "Characters" },
   ],
 });

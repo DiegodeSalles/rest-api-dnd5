@@ -13,7 +13,7 @@ export async function createCharacterTeste(app: FastifyInstance) {
       await character.save();
 
       await User.findByIdAndUpdate(userId, {
-        $push: { charater_sheets_ids: character._id },
+        $push: { character_sheets_ids: character._id },
       });
 
       reply.send(character);

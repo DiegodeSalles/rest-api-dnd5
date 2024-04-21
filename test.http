@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
     "email": "jjjjj@email.com",
-    "name": "fdsfdsfsdf",
+    "name": "fdsfdsfsdff",
     "password": "aaaaa"
 }
 
@@ -22,7 +22,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/users/662422ced190abca40a45c9e/create
+POST http://localhost:3000/users/66256ffa809070a477cae344/create
 Content-Type: application/json
 
 {
