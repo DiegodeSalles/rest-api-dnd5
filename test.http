@@ -14,7 +14,12 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/users/66256ffa809070a477cae344/6625769c1cd3e1467aafa7e5
+DELETE http://localhost:3000/users/66257cfd891f66a84415b499/6625799fecf252c2cc791f5e
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:3000/users/66257ced891f66a84415b3fe/
 Content-Type: application/json
 
 ###
@@ -27,7 +32,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/users/66256ffa809070a477cae344/create
+POST http://localhost:3000/users/66257cfd891f66a84415b499/create
 Content-Type: application/json
 
 {
