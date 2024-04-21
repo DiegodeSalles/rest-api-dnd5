@@ -32,6 +32,22 @@ Content-Type: application/json
 
 ###
 
+PATCH  http://localhost:3000/users/66257cfd891f66a84415b499/66259cbb11d1f60ecfb3ccb6
+Content-Type: application/json
+
+{
+  "attributes": {
+    "strength": 15,
+    "dexterity": 3,
+    "constitution": 3,
+    "intelligence": 3,
+    "wisdom": 3,
+    "charisma": 3
+  }
+}
+
+###
+
 DELETE http://localhost:3000/users/66257ced891f66a84415b3fe/
 Content-Type: application/json
 
@@ -50,7 +66,7 @@ Content-Type: application/json
 
 {
   "player_details": {
-    "char_player_name": "Diego",
+    "char_player_name": "Tesftes",
     "char_name": "Teste",
     "char_class": "Teste",
     "char_level": 1,

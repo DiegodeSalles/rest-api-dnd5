@@ -58,5 +58,5 @@ O projeto utiliza o Swagger para facilitar nos testes e documentação dos endpo
 - [x] Criar a rota para deletar o usuário
 - [x] Criar a rota para criar uma ficha de personagem do usuário
 - [x] Criar a rota para listar as fichas de personagens criados pelo usuário
-- [ ] Criar a rota para editar uma ficha de personagem criada pelo usuário
+- [x] Criar a rota para editar uma ficha de personagem criada pelo usuário
 - [x] Criar a rota para deletar uma ficha de personagem criada pelo usuário

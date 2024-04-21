@@ -15,6 +15,7 @@ import { deleteCharacter } from "./routes/deleteCharacter";
 import { deleteUser } from "./routes/deleteUser";
 import { getUserCharacters } from "./routes/getUserCharacters";
 import { updateUser } from "./routes/updateUser";
+import { updateCharacter } from "./routes/updateCharacter";
 
 async function main() {
   mongoose.connect(process.env.MONGO_URL as string);
@@ -47,6 +48,7 @@ app.register(deleteCharacter);
 app.register(deleteUser);
 app.register(getUserCharacters);
 app.register(updateUser);
+app.register(updateCharacter);
 
 const start = async () => {
   try {
@@ -54,6 +56,7 @@ const start = async () => {
     console.log("http://127.0.0.1:3000");
     main().catch((err) => console.log(err));
   } catch (error) {
+    console.log(error);
     process.exit(1);
   }
 };
