@@ -10,6 +10,7 @@ import { createUserTeste } from "./routes/createUserTeste";
 import mongoose from "mongoose";
 
 import { createCharacterTeste } from "./routes/createCharacterTeste";
+import { getUsers } from "./routes/getUsers";
 
 async function main() {
   mongoose.connect(process.env.MONGO_URL as string);
@@ -37,6 +38,7 @@ app.register(fastifySwaggerUi, { routePrefix: "/docs" });
 
 app.register(createUserTeste);
 app.register(createCharacterTeste);
+app.register(getUsers);
 
 const start = async () => {
   try {

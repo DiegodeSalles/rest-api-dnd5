@@ -2,14 +2,14 @@ POST http://localhost:3000/users/create
 Content-Type: application/json
 
 {
-    "email": "abcgggd@email.com",
-    "name": "ta",
-    "password": "1235"
+    "email": "jjjjj@email.com",
+    "name": "fdsfdsfsdf",
+    "password": "aaaaa"
 }
 
 ###
 
-GET http://localhost:3000/teste/retorno
+GET http://localhost:3000/users
 Content-Type: application/json
 
 ###
