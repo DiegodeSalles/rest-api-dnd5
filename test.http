@@ -19,6 +19,14 @@ Content-Type: application/json
 
 ###
 
+PATCH  http://localhost:3000/users/66257cfd891f66a84415b499
+Content-Type: application/json
+
+{
+  "email": "bbbb@email.com"
+}
+###
+
 DELETE http://localhost:3000/users/66257cfd891f66a84415b499/6625799fecf252c2cc791f5e
 Content-Type: application/json
 

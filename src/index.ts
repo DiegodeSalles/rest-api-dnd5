@@ -14,6 +14,7 @@ import { getUsers } from "./routes/getUsers";
 import { deleteCharacter } from "./routes/deleteCharacter";
 import { deleteUser } from "./routes/deleteUser";
 import { getUserCharacters } from "./routes/getUserCharacters";
+import { updateUser } from "./routes/updateUser";
 
 async function main() {
   mongoose.connect(process.env.MONGO_URL as string);
@@ -45,6 +46,7 @@ app.register(getUsers);
 app.register(deleteCharacter);
 app.register(deleteUser);
 app.register(getUserCharacters);
+app.register(updateUser);
 
 const start = async () => {
   try {
