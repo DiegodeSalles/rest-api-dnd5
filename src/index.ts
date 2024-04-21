@@ -13,6 +13,7 @@ import { createCharacterTeste } from "./routes/createCharacterTeste";
 import { getUsers } from "./routes/getUsers";
 import { deleteCharacter } from "./routes/deleteCharacter";
 import { deleteUser } from "./routes/deleteUser";
+import { getUserCharacters } from "./routes/getUserCharacters";
 
 async function main() {
   mongoose.connect(process.env.MONGO_URL as string);
@@ -43,6 +44,7 @@ app.register(createCharacterTeste);
 app.register(getUsers);
 app.register(deleteCharacter);
 app.register(deleteUser);
+app.register(getUserCharacters);
 
 const start = async () => {
   try {

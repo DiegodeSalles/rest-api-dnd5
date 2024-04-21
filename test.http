@@ -14,6 +14,11 @@ Content-Type: application/json
 
 ###
 
+GET http://localhost:3000/users/66257cfd891f66a84415b499
+Content-Type: application/json
+
+###
+
 DELETE http://localhost:3000/users/66257cfd891f66a84415b499/6625799fecf252c2cc791f5e
 Content-Type: application/json
 
