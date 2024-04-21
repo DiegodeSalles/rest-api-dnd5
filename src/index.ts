@@ -5,11 +5,11 @@ import {
 } from "fastify-type-provider-zod";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
-import { createUserTeste } from "./routes/createUserTeste";
+import { createUser } from "./routes/createUser";
 
 import mongoose from "mongoose";
 
-import { createCharacterTeste } from "./routes/createCharacterTeste";
+import { createCharacter } from "./routes/createCharacter";
 import { getUsers } from "./routes/getUsers";
 import { deleteCharacter } from "./routes/deleteCharacter";
 import { deleteUser } from "./routes/deleteUser";
@@ -41,8 +41,8 @@ app.register(fastifySwagger, {
 
 app.register(fastifySwaggerUi, { routePrefix: "/docs" });
 
-app.register(createUserTeste);
-app.register(createCharacterTeste);
+app.register(createUser);
+app.register(createCharacter);
 app.register(getUsers);
 app.register(deleteCharacter);
 app.register(deleteUser);

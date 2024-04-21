@@ -3,7 +3,7 @@ import { Character } from "../models/Character";
 import mongoose from "mongoose";
 import { User } from "../models/User";
 
-export async function createCharacterTeste(app: FastifyInstance) {
+export async function createCharacter(app: FastifyInstance) {
   app.post("/users/:id/create", async (request: any, reply) => {
     try {
       const userId = new mongoose.Types.ObjectId(request.params);

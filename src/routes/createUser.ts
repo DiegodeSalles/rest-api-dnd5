@@ -3,7 +3,7 @@ import { User } from "../models/User";
 import { UserInterface } from "../interfaces/userInterface";
 import { GeneratePassword } from "../utils/passwordUtils";
 
-export async function createUserTeste(app: FastifyInstance) {
+export async function createUser(app: FastifyInstance) {
   app.post(
     "/users/create",
 
