@@ -4,12 +4,17 @@ Content-Type: application/json
 {
     "email": "jjjjj@email.com",
     "name": "fdsfdsfsdff",
-    "password": "aaaaa"
+    "password": "aaaaaa"
 }
 
 ###
 
 GET http://localhost:3000/users
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:3000/users/66256ffa809070a477cae344/6625769c1cd3e1467aafa7e5
 Content-Type: application/json
 
 ###
